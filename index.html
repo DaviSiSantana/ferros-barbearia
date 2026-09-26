@@ -1,346 +1,346 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ferros Barbearia - Agendamento e Fila de Espera</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
+!DOCTYPE html
+html lang=pt-BR
+head
+  meta charset=UTF-8
+  meta name=viewport content=width=device-width, initial-scale=1.0
+  titleFerros Barbearia - Agendamento e Fila de Esperatitle
+  !-- Tailwind CSS --
+  script src=httpscdn.tailwindcss.comscript
+  !-- FontAwesome Icons --
+  link rel=stylesheet href=httpscdnjs.cloudflare.comajaxlibsfont-awesome6.4.0cssall.min.css
+  !-- Google Fonts --
+  link rel=preconnect href=httpsfonts.googleapis.com
+  link rel=preconnect href=httpsfonts.gstatic.com crossorigin
+  link href=httpsfonts.googleapis.comcss2family=Playfair+Displayital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sanswght@400;500;600;700&display=swap rel=stylesheet
+  script
     tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            brand: ['Playfair Display', 'serif'],
-            sans: ['Plus Jakarta Sans', 'sans-serif'],
+      theme {
+        extend {
+          fontFamily {
+            brand ['Playfair Display', 'serif'],
+            sans ['Plus Jakarta Sans', 'sans-serif'],
           },
-          colors: {
-            brand: {
-              gold: '#D4AF37',
-              dark: '#101010',
-              card: '#1A1A1A',
-              border: '#2A2A2A',
-              accent: '#F3E5AB'
+          colors {
+            brand {
+              gold '#D4AF37',
+              dark '#101010',
+              card '#1A1A1A',
+              border '#2A2A2A',
+              accent '#F3E5AB'
             }
           }
         }
       }
     }
-  </script>
-  <style>
-    body { background-color: #101010; color: #E0E0E0; font-family: 'Plus Jakarta Sans', sans-serif; }
-    .scrollbar-hide::-webkit-scrollbar { display: none; }
-    .font-brand-logo { font-family: 'Playfair Display', serif; }
-  </style>
-</head>
-<body class="min-h-screen flex flex-col">
+  script
+  style
+    body { background-color #101010; color #E0E0E0; font-family 'Plus Jakarta Sans', sans-serif; }
+    .scrollbar-hide-webkit-scrollbar { display none; }
+    .font-brand-logo { font-family 'Playfair Display', serif; }
+  style
+head
+body class=min-h-screen flex flex-col
 
-  <!-- Header / Navigation -->
-  <header class="bg-brand-card border-b border-brand-border sticky top-0 z-50">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+  !-- Header  Navigation --
+  header class=bg-brand-card border-b border-brand-border sticky top-0 z-50
+    div class=max-w-5xl mx-auto px-4 py-3 flex justify-between items-center
       
-      <!-- LOGO FERROS BARBEARIA -->
-      <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('client')">
-        <div class="bg-white text-black rounded-lg px-3 py-1 flex flex-col items-center justify-center border border-brand-gold/40 shadow-sm">
-          <span class="font-brand-logo text-2xl font-bold tracking-tight leading-none italic">Ferros</span>
-          <span class="text-[9px] uppercase tracking-widest text-gray-700 font-semibold -mt-0.5">Barbearia</span>
-        </div>
-      </div>
+      !-- LOGO FERROS BARBEARIA --
+      div class=flex items-center gap-3 cursor-pointer onclick=switchTab('client')
+        div class=bg-white text-black rounded-lg px-3 py-1 flex flex-col items-center justify-center border border-brand-gold40 shadow-sm
+          span class=font-brand-logo text-2xl font-bold tracking-tight leading-none italicFerrosspan
+          span class=text-[9px] uppercase tracking-widest text-gray-700 font-semibold -mt-0.5Barbeariaspan
+        div
+      div
 
-      <!-- Navigation Tabs -->
-      <nav class="flex bg-black/50 p-1 rounded-xl border border-brand-border text-xs sm:text-sm">
-        <button id="tab-client" onclick="switchTab('client')" class="px-3.5 py-1.5 rounded-lg font-medium text-black bg-brand-gold transition">
-          <i class="fa-regular fa-calendar-check mr-1.5"></i> Agendar
-        </button>
-        <button id="tab-queue" onclick="switchTab('queue')" class="px-3.5 py-1.5 rounded-md font-medium text-gray-300 hover:text-white transition">
-          <i class="fa-solid fa-users-line mr-1.5"></i> Fila Ao Vivo
-        </button>
-        <button id="tab-admin" onclick="switchTab('admin')" class="px-3.5 py-1.5 rounded-md font-medium text-gray-300 hover:text-white transition">
-          <i class="fa-solid fa-user-shield mr-1.5"></i> Painel
-        </button>
-      </nav>
-    </div>
-  </header>
+      !-- Navigation Tabs --
+      nav class=flex bg-black50 p-1 rounded-xl border border-brand-border text-xs smtext-sm
+        button id=tab-client onclick=switchTab('client') class=px-3.5 py-1.5 rounded-lg font-medium text-black bg-brand-gold transition
+          i class=fa-regular fa-calendar-check mr-1.5i Agendar
+        button
+        button id=tab-queue onclick=switchTab('queue') class=px-3.5 py-1.5 rounded-md font-medium text-gray-300 hovertext-white transition
+          i class=fa-solid fa-users-line mr-1.5i Fila Ao Vivo
+        button
+        button id=tab-admin onclick=switchTab('admin') class=px-3.5 py-1.5 rounded-md font-medium text-gray-300 hovertext-white transition
+          i class=fa-solid fa-user-shield mr-1.5i Painel
+        button
+      nav
+    div
+  header
 
-  <!-- Main Container -->
-  <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6">
+  !-- Main Container --
+  main class=flex-1 max-w-5xl w-full mx-auto p-4 smp-6
 
-    <!-- TAB 1: CLIENT AGENDAMENTO -->
-    <section id="view-client" class="space-y-6">
+    !-- TAB 1 CLIENT AGENDAMENTO --
+    section id=view-client class=space-y-6
       
-      <!-- Banner Ferros Barbearia -->
-      <div class="bg-gradient-to-r from-neutral-900 via-brand-card to-neutral-900 p-6 rounded-2xl border border-brand-border text-center sm:text-left flex flex-col sm:flex-row justify-between items-center gap-4 relative overflow-hidden">
-        <div class="z-10">
-          <span class="bg-brand-gold/20 text-brand-gold text-xs px-3 py-1 rounded-full font-semibold border border-brand-gold/30">Agendamento Online</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2"><span class="font-brand-logo italic text-brand-gold font-normal">Ferros</span> Barbearia</h2>
-          <p class="text-gray-400 text-sm mt-1">Selecione os serviços desejados e escolha seu horário. Atendimento exclusivo de hora em hora.</p>
-        </div>
-        <div class="z-10 bg-black/40 border border-brand-border rounded-2xl p-3 flex items-center gap-3">
-          <i class="fa-solid fa-scissors text-2xl text-brand-gold"></i>
-          <div class="text-left text-xs">
-            <p class="text-white font-bold">Atendimento com Hora Marcada</p>
-            <p class="text-gray-400">Qualidade & Precisão</p>
-          </div>
-        </div>
-      </div>
+      !-- Banner Ferros Barbearia --
+      div class=bg-gradient-to-r from-neutral-900 via-brand-card to-neutral-900 p-6 rounded-2xl border border-brand-border text-center smtext-left flex flex-col smflex-row justify-between items-center gap-4 relative overflow-hidden
+        div class=z-10
+          span class=bg-brand-gold20 text-brand-gold text-xs px-3 py-1 rounded-full font-semibold border border-brand-gold30Agendamento Onlinespan
+          h2 class=text-2xl smtext-3xl font-extrabold text-white mt-2span class=font-brand-logo italic text-brand-gold font-normalFerrosspan Barbeariah2
+          p class=text-gray-400 text-sm mt-1Selecione os serviços desejados e escolha seu horário. Atendimento exclusivo de hora em hora.p
+        div
+        div class=z-10 bg-black40 border border-brand-border rounded-2xl p-3 flex items-center gap-3
+          i class=fa-solid fa-scissors text-2xl text-brand-goldi
+          div class=text-left text-xs
+            p class=text-white font-boldAtendimento com Hora Marcadap
+            p class=text-gray-400Qualidade & Precisãop
+          div
+        div
+      div
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Step 1 & 2 Form -->
-        <div class="md:col-span-2 space-y-6">
+      div class=grid grid-cols-1 mdgrid-cols-3 gap-6
+        !-- Step 1 & 2 Form --
+        div class=mdcol-span-2 space-y-6
           
-          <!-- Cliente Dados -->
-          <div class="bg-brand-card p-5 rounded-2xl border border-brand-border space-y-4">
-            <h3 class="text-base font-semibold text-white flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-brand-gold text-black text-xs flex items-center justify-center font-bold">1</span>
+          !-- Cliente Dados --
+          div class=bg-brand-card p-5 rounded-2xl border border-brand-border space-y-4
+            h3 class=text-base font-semibold text-white flex items-center gap-2
+              span class=w-6 h-6 rounded-full bg-brand-gold text-black text-xs flex items-center justify-center font-bold1span
               Seus Dados
-            </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label class="block text-xs text-gray-400 mb-1">Nome Completo</label>
-                <input type="text" id="client-name" placeholder="Ex: João Silva" class="w-full bg-black/50 border border-brand-border rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-brand-gold">
-              </div>
-              <div>
-                <label class="block text-xs text-gray-400 mb-1">WhatsApp / Telefone</label>
-                <input type="tel" id="client-phone" placeholder="(61) 99999-9999" class="w-full bg-black/50 border border-brand-border rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-brand-gold">
-              </div>
-            </div>
-          </div>
+            h3
+            div class=grid grid-cols-1 smgrid-cols-2 gap-3
+              div
+                label class=block text-xs text-gray-400 mb-1Nome Completolabel
+                input type=text id=client-name placeholder=Ex João Silva class=w-full bg-black50 border border-brand-border rounded-xl px-3.5 py-2.5 text-sm text-white focusoutline-none focusborder-brand-gold
+              div
+              div
+                label class=block text-xs text-gray-400 mb-1WhatsApp  Telefonelabel
+                input type=tel id=client-phone placeholder=(61) 99999-9999 class=w-full bg-black50 border border-brand-border rounded-xl px-3.5 py-2.5 text-sm text-white focusoutline-none focusborder-brand-gold
+              div
+            div
+          div
 
-          <!-- Serviços -->
-          <div class="bg-brand-card p-5 rounded-2xl border border-brand-border space-y-4">
-            <h3 class="text-base font-semibold text-white flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-brand-gold text-black text-xs flex items-center justify-center font-bold">2</span>
+          !-- Serviços --
+          div class=bg-brand-card p-5 rounded-2xl border border-brand-border space-y-4
+            h3 class=text-base font-semibold text-white flex items-center gap-2
+              span class=w-6 h-6 rounded-full bg-brand-gold text-black text-xs flex items-center justify-center font-bold2span
               Escolha os Serviços
-            </h3>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <label class="service-card cursor-pointer bg-black/40 border border-brand-border hover:border-brand-gold p-4 rounded-xl flex flex-col justify-between transition">
-                <div class="flex justify-between items-start">
-                  <i class="fa-solid fa-scissors text-brand-gold text-xl"></i>
-                  <input type="checkbox" value="Cabelo" data-price="40" data-time="40" onchange="updateSummary()" class="service-checkbox accent-yellow-500 w-4 h-4">
-                </div>
-                <div class="mt-3">
-                  <p class="font-bold text-white text-sm">Cabelo</p>
-                  <p class="text-xs text-gray-400">40 min • R$ 40</p>
-                </div>
-              </label>
+            h3
+            div class=grid grid-cols-1 smgrid-cols-3 gap-3
+              label class=service-card cursor-pointer bg-black40 border border-brand-border hoverborder-brand-gold p-4 rounded-xl flex flex-col justify-between transition
+                div class=flex justify-between items-start
+                  i class=fa-solid fa-scissors text-brand-gold text-xli
+                  input type=checkbox value=Cabelo data-price=40 data-time=40 onchange=updateSummary() class=service-checkbox accent-yellow-500 w-4 h-4
+                div
+                div class=mt-3
+                  p class=font-bold text-white text-smCabelop
+                  p class=text-xs text-gray-40040 min • R$ 40p
+                div
+              label
 
-              <label class="service-card cursor-pointer bg-black/40 border border-brand-border hover:border-brand-gold p-4 rounded-xl flex flex-col justify-between transition">
-                <div class="flex justify-between items-start">
-                  <i class="fa-solid fa-user text-brand-gold text-xl"></i>
-                  <input type="checkbox" value="Barba" data-price="30" data-time="40" onchange="updateSummary()" class="service-checkbox accent-yellow-500 w-4 h-4">
-                </div>
-                <div class="mt-3">
-                  <p class="font-bold text-white text-sm">Barba</p>
-                  <p class="text-xs text-gray-400">40 min • R$ 30</p>
-                </div>
-              </label>
+              label class=service-card cursor-pointer bg-black40 border border-brand-border hoverborder-brand-gold p-4 rounded-xl flex flex-col justify-between transition
+                div class=flex justify-between items-start
+                  i class=fa-solid fa-user text-brand-gold text-xli
+                  input type=checkbox value=Barba data-price=30 data-time=40 onchange=updateSummary() class=service-checkbox accent-yellow-500 w-4 h-4
+                div
+                div class=mt-3
+                  p class=font-bold text-white text-smBarbap
+                  p class=text-xs text-gray-40040 min • R$ 30p
+                div
+              label
 
-              <label class="service-card cursor-pointer bg-black/40 border border-brand-border hover:border-brand-gold p-4 rounded-xl flex flex-col justify-between transition">
-                <div class="flex justify-between items-start">
-                  <i class="fa-solid fa-eye text-brand-gold text-xl"></i>
-                  <input type="checkbox" value="Sobrancelha" data-price="15" data-time="20" onchange="updateSummary()" class="service-checkbox accent-yellow-500 w-4 h-4">
-                </div>
-                <div class="mt-3">
-                  <p class="font-bold text-white text-sm">Sobrancelha</p>
-                  <p class="text-xs text-gray-400">20 min • R$ 15</p>
-                </div>
-              </label>
-            </div>
-          </div>
+              label class=service-card cursor-pointer bg-black40 border border-brand-border hoverborder-brand-gold p-4 rounded-xl flex flex-col justify-between transition
+                div class=flex justify-between items-start
+                  i class=fa-solid fa-eye text-brand-gold text-xli
+                  input type=checkbox value=Sobrancelha data-price=15 data-time=20 onchange=updateSummary() class=service-checkbox accent-yellow-500 w-4 h-4
+                div
+                div class=mt-3
+                  p class=font-bold text-white text-smSobrancelhap
+                  p class=text-xs text-gray-40020 min • R$ 15p
+                div
+              label
+            div
+          div
 
-          <!-- Data e Horário -->
-          <div class="bg-brand-card p-5 rounded-2xl border border-brand-border space-y-4">
-            <h3 class="text-base font-semibold text-white flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-brand-gold text-black text-xs flex items-center justify-center font-bold">3</span>
+          !-- Data e Horário --
+          div class=bg-brand-card p-5 rounded-2xl border border-brand-border space-y-4
+            h3 class=text-base font-semibold text-white flex items-center gap-2
+              span class=w-6 h-6 rounded-full bg-brand-gold text-black text-xs flex items-center justify-center font-bold3span
               Selecione o Dia e Horário
-            </h3>
+            h3
             
-            <div>
-              <label class="block text-xs text-gray-400 mb-1">Data do Agendamento</label>
-              <input type="date" id="booking-date" onchange="generateTimeSlots()" class="bg-black/50 border border-brand-border rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-gold w-full sm:w-auto">
-            </div>
+            div
+              label class=block text-xs text-gray-400 mb-1Data do Agendamentolabel
+              input type=date id=booking-date onchange=generateTimeSlots() class=bg-black50 border border-brand-border rounded-xl px-3 py-2 text-sm text-white focusoutline-none focusborder-brand-gold w-full smw-auto
+            div
 
-            <div>
-              <label class="block text-xs text-gray-400 mb-2">Horários Disponíveis (Intervalos de 1 Hora)</label>
-              <div id="slots-container" class="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                <p class="text-xs text-gray-500 col-span-full">Selecione uma data acima para ver os horários.</p>
-              </div>
-            </div>
-          </div>
+            div
+              label class=block text-xs text-gray-400 mb-2Horários Disponíveis (Intervalos de 1 Hora)label
+              div id=slots-container class=grid grid-cols-3 smgrid-cols-4 gap-2
+                p class=text-xs text-gray-500 col-span-fullSelecione uma data acima para ver os horários.p
+              div
+            div
+          div
 
-        </div>
+        div
 
-        <!-- Summary & Confirmation Sidebar -->
-        <div class="space-y-6">
-          <div class="bg-brand-card p-5 rounded-2xl border border-brand-border sticky top-20">
-            <h3 class="text-base font-semibold text-white border-b border-brand-border pb-3 mb-4">Resumo do Agendamento</h3>
+        !-- Summary & Confirmation Sidebar --
+        div class=space-y-6
+          div class=bg-brand-card p-5 rounded-2xl border border-brand-border sticky top-20
+            h3 class=text-base font-semibold text-white border-b border-brand-border pb-3 mb-4Resumo do Agendamentoh3
             
-            <div class="space-y-3 text-sm">
-              <div class="flex justify-between text-gray-400">
-                <span>Local:</span>
-                <span class="text-white font-medium">Ferros Barbearia</span>
-              </div>
-              <div class="flex justify-between text-gray-400">
-                <span>Serviços:</span>
-                <span id="summary-services" class="text-white font-medium text-right">Nenhum</span>
-              </div>
-              <div class="flex justify-between text-gray-400">
-                <span>Data:</span>
-                <span id="summary-date" class="text-white font-medium">--/--/----</span>
-              </div>
-              <div class="flex justify-between text-gray-400">
-                <span>Horário:</span>
-                <span id="summary-time" class="text-brand-gold font-bold">--:--</span>
-              </div>
-              <div class="flex justify-between text-gray-400">
-                <span>Duração Estimada:</span>
-                <span id="summary-duration" class="text-white font-medium">0 min</span>
-              </div>
+            div class=space-y-3 text-sm
+              div class=flex justify-between text-gray-400
+                spanLocalspan
+                span class=text-white font-mediumFerros Barbeariaspan
+              div
+              div class=flex justify-between text-gray-400
+                spanServiçosspan
+                span id=summary-services class=text-white font-medium text-rightNenhumspan
+              div
+              div class=flex justify-between text-gray-400
+                spanDataspan
+                span id=summary-date class=text-white font-medium--------span
+              div
+              div class=flex justify-between text-gray-400
+                spanHoráriospan
+                span id=summary-time class=text-brand-gold font-bold----span
+              div
+              div class=flex justify-between text-gray-400
+                spanDuração Estimadaspan
+                span id=summary-duration class=text-white font-medium0 minspan
+              div
               
-              <div class="border-t border-brand-border pt-3 mt-3 flex justify-between items-center">
-                <span class="text-base font-bold text-white">Total:</span>
-                <span id="summary-total" class="text-xl font-extrabold text-brand-gold">R$ 0</span>
-              </div>
-            </div>
+              div class=border-t border-brand-border pt-3 mt-3 flex justify-between items-center
+                span class=text-base font-bold text-whiteTotalspan
+                span id=summary-total class=text-xl font-extrabold text-brand-goldR$ 0span
+              div
+            div
 
-            <button onclick="confirmBooking()" class="w-full mt-6 bg-brand-gold hover:bg-yellow-500 text-black font-bold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
-              <i class="fa-brands fa-whatsapp text-lg"></i> Confirmar no WhatsApp
-            </button>
-            <p class="text-xs text-center text-gray-500 mt-2">Sua vaga será reservada na Ferros Barbearia.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+            button onclick=confirmBooking() class=w-full mt-6 bg-brand-gold hoverbg-yellow-500 text-black font-bold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2
+              i class=fa-brands fa-whatsapp text-lgi Confirmar no WhatsApp
+            button
+            p class=text-xs text-center text-gray-500 mt-2Sua vaga será reservada na Ferros Barbearia.p
+          div
+        div
+      div
+    section
 
-    <!-- TAB 2: QUEUE / FILA AO VIVO -->
-    <section id="view-queue" class="hidden space-y-6">
-      <div class="bg-brand-card p-6 rounded-2xl border border-brand-border flex flex-col md:flex-row justify-between items-center gap-4">
-        <div>
-          <h2 class="text-xl font-bold text-white flex items-center gap-2">
-            <span class="w-3 h-3 rounded-full bg-green-500 animate-ping"></span>
+    !-- TAB 2 QUEUE  FILA AO VIVO --
+    section id=view-queue class=hidden space-y-6
+      div class=bg-brand-card p-6 rounded-2xl border border-brand-border flex flex-col mdflex-row justify-between items-center gap-4
+        div
+          h2 class=text-xl font-bold text-white flex items-center gap-2
+            span class=w-3 h-3 rounded-full bg-green-500 animate-pingspan
             Fila de Espera Presencial - Ferros Barbearia
-          </h2>
-          <p class="text-gray-400 text-sm mt-1">Acompanhe a fila em tempo real se você não possui horário marcado.</p>
-        </div>
-        <button onclick="openJoinQueueModal()" class="bg-brand-gold hover:bg-yellow-500 text-black font-bold px-4 py-2.5 rounded-xl transition text-sm">
+          h2
+          p class=text-gray-400 text-sm mt-1Acompanhe a fila em tempo real se você não possui horário marcado.p
+        div
+        button onclick=openJoinQueueModal() class=bg-brand-gold hoverbg-yellow-500 text-black font-bold px-4 py-2.5 rounded-xl transition text-sm
           + Entrar na Fila Presencial
-        </button>
-      </div>
+        button
+      div
 
-      <!-- Current Serving Card -->
-      <div id="now-serving-box" class="bg-gradient-to-r from-amber-500/10 via-brand-card to-brand-card border border-brand-gold/40 p-5 rounded-2xl flex items-center justify-between">
-        <div class="flex items-center gap-4">
-          <div class="w-12 h-12 rounded-full bg-brand-gold/20 text-brand-gold flex items-center justify-center text-2xl font-bold border border-brand-gold/40">
-            <i class="fa-solid fa-chair"></i>
-          </div>
-          <div>
-            <p class="text-xs text-brand-gold uppercase tracking-wider font-semibold">Cadeira de Atendimento</p>
-            <h3 id="now-serving-name" class="text-lg font-bold text-white">Nenhum cliente na cadeira</h3>
-            <p id="now-serving-service" class="text-xs text-gray-400">---</p>
-          </div>
-        </div>
-      </div>
+      !-- Current Serving Card --
+      div id=now-serving-box class=bg-gradient-to-r from-amber-50010 via-brand-card to-brand-card border border-brand-gold40 p-5 rounded-2xl flex items-center justify-between
+        div class=flex items-center gap-4
+          div class=w-12 h-12 rounded-full bg-brand-gold20 text-brand-gold flex items-center justify-center text-2xl font-bold border border-brand-gold40
+            i class=fa-solid fa-chairi
+          div
+          div
+            p class=text-xs text-brand-gold uppercase tracking-wider font-semiboldCadeira de Atendimentop
+            h3 id=now-serving-name class=text-lg font-bold text-whiteNenhum cliente na cadeirah3
+            p id=now-serving-service class=text-xs text-gray-400---p
+          div
+        div
+      div
 
-      <!-- Queue List -->
-      <div class="bg-brand-card p-5 rounded-2xl border border-brand-border">
-        <h3 class="text-base font-semibold text-white mb-4">Próximos da Fila</h3>
-        <div id="queue-list" class="space-y-3">
-          <!-- Rendered via JS -->
-        </div>
-      </div>
-    </section>
+      !-- Queue List --
+      div class=bg-brand-card p-5 rounded-2xl border border-brand-border
+        h3 class=text-base font-semibold text-white mb-4Próximos da Filah3
+        div id=queue-list class=space-y-3
+          !-- Rendered via JS --
+        div
+      div
+    section
 
-    <!-- TAB 3: ADMIN / PAINEL DA BARBEARIA -->
-    <section id="view-admin" class="hidden space-y-6">
-      <div class="flex justify-between items-center bg-brand-card p-5 rounded-2xl border border-brand-border">
-        <div>
-          <h2 class="text-xl font-bold text-white">Painel Ferros Barbearia</h2>
-          <p class="text-xs text-gray-400">Controle completo de agendamentos e ordem da fila</p>
-        </div>
-        <div class="flex gap-2">
-          <span class="bg-black/50 border border-brand-border text-xs px-3 py-1.5 rounded-lg text-gray-300">
-            Hoje: <strong id="admin-today-count" class="text-brand-gold">0</strong> clientes
-          </span>
-        </div>
-      </div>
+    !-- TAB 3 ADMIN  PAINEL DA BARBEARIA --
+    section id=view-admin class=hidden space-y-6
+      div class=flex justify-between items-center bg-brand-card p-5 rounded-2xl border border-brand-border
+        div
+          h2 class=text-xl font-bold text-whitePainel Ferros Barbeariah2
+          p class=text-xs text-gray-400Controle completo de agendamentos e ordem da filap
+        div
+        div class=flex gap-2
+          span class=bg-black50 border border-brand-border text-xs px-3 py-1.5 rounded-lg text-gray-300
+            Hoje strong id=admin-today-count class=text-brand-gold0strong clientes
+          span
+        div
+      div
 
-      <!-- Admin Tables -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      !-- Admin Tables --
+      div class=grid grid-cols-1 lggrid-cols-2 gap-6
         
-        <!-- Agendamentos do Dia -->
-        <div class="bg-brand-card p-5 rounded-2xl border border-brand-border space-y-4">
-          <div class="flex justify-between items-center border-b border-brand-border pb-3">
-            <h3 class="text-base font-semibold text-white flex items-center gap-2">
-              <i class="fa-regular fa-calendar-days text-brand-gold"></i> Horários Marcados
-            </h3>
-            <span class="text-xs text-gray-400" id="admin-date-label"></span>
-          </div>
+        !-- Agendamentos do Dia --
+        div class=bg-brand-card p-5 rounded-2xl border border-brand-border space-y-4
+          div class=flex justify-between items-center border-b border-brand-border pb-3
+            h3 class=text-base font-semibold text-white flex items-center gap-2
+              i class=fa-regular fa-calendar-days text-brand-goldi Horários Marcados
+            h3
+            span class=text-xs text-gray-400 id=admin-date-labelspan
+          div
 
-          <div id="admin-appointments-list" class="space-y-3 max-h-[400px] overflow-y-auto pr-1">
-            <!-- Rendered via JS -->
-          </div>
-        </div>
+          div id=admin-appointments-list class=space-y-3 max-h-[400px] overflow-y-auto pr-1
+            !-- Rendered via JS --
+          div
+        div
 
-        <!-- Fila Presencial Management -->
-        <div class="bg-brand-card p-5 rounded-2xl border border-brand-border space-y-4">
-          <div class="flex justify-between items-center border-b border-brand-border pb-3">
-            <h3 class="text-base font-semibold text-white flex items-center gap-2">
-              <i class="fa-solid fa-list-ol text-brand-gold"></i> Gestão da Fila Presencial
-            </h3>
-          </div>
+        !-- Fila Presencial Management --
+        div class=bg-brand-card p-5 rounded-2xl border border-brand-border space-y-4
+          div class=flex justify-between items-center border-b border-brand-border pb-3
+            h3 class=text-base font-semibold text-white flex items-center gap-2
+              i class=fa-solid fa-list-ol text-brand-goldi Gestão da Fila Presencial
+            h3
+          div
 
-          <div id="admin-queue-list" class="space-y-3 max-h-[400px] overflow-y-auto pr-1">
-            <!-- Rendered via JS -->
-          </div>
-        </div>
+          div id=admin-queue-list class=space-y-3 max-h-[400px] overflow-y-auto pr-1
+            !-- Rendered via JS --
+          div
+        div
 
-      </div>
-    </section>
+      div
+    section
 
-  </main>
+  main
 
-  <!-- Modal: Join Queue -->
-  <div id="modal-queue" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-brand-card border border-brand-border w-full max-w-md p-6 rounded-2xl space-y-4">
-      <div class="flex justify-between items-center">
-        <h3 class="text-lg font-bold text-white">Entrar na Fila Presencial</h3>
-        <button onclick="closeJoinQueueModal()" class="text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
-      </div>
-      <div>
-        <label class="block text-xs text-gray-400 mb-1">Seu Nome</label>
-        <input type="text" id="queue-client-name" placeholder="Ex: Lucas Gabriel" class="w-full bg-black/50 border border-brand-border rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-gold">
-      </div>
-      <div>
-        <label class="block text-xs text-gray-400 mb-1">Serviço Pretendido</label>
-        <select id="queue-client-service" class="w-full bg-black/50 border border-brand-border rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-gold">
-          <option value="Cabelo">Cabelo (R$ 40)</option>
-          <option value="Barba">Barba (R$ 30)</option>
-          <option value="Combo Cabelo + Barba">Combo Cabelo + Barba (R$ 65)</option>
-        </select>
-      </div>
-      <button onclick="submitQueueEntry()" class="w-full bg-brand-gold hover:bg-yellow-500 text-black font-bold py-2.5 rounded-xl transition">
+  !-- Modal Join Queue --
+  div id=modal-queue class=fixed inset-0 bg-black80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4
+    div class=bg-brand-card border border-brand-border w-full max-w-md p-6 rounded-2xl space-y-4
+      div class=flex justify-between items-center
+        h3 class=text-lg font-bold text-whiteEntrar na Fila Presencialh3
+        button onclick=closeJoinQueueModal() class=text-gray-400 hovertext-whitei class=fa-solid fa-xmark text-lgibutton
+      div
+      div
+        label class=block text-xs text-gray-400 mb-1Seu Nomelabel
+        input type=text id=queue-client-name placeholder=Ex Lucas Gabriel class=w-full bg-black50 border border-brand-border rounded-xl px-3 py-2 text-sm text-white focusoutline-none focusborder-brand-gold
+      div
+      div
+        label class=block text-xs text-gray-400 mb-1Serviço Pretendidolabel
+        select id=queue-client-service class=w-full bg-black50 border border-brand-border rounded-xl px-3 py-2 text-sm text-white focusoutline-none focusborder-brand-gold
+          option value=CabeloCabelo (R$ 40)option
+          option value=BarbaBarba (R$ 30)option
+          option value=Combo Cabelo + BarbaCombo Cabelo + Barba (R$ 65)option
+        select
+      div
+      button onclick=submitQueueEntry() class=w-full bg-brand-gold hoverbg-yellow-500 text-black font-bold py-2.5 rounded-xl transition
         Confirmar Entrada na Fila
-      </button>
-    </div>
-  </div>
+      button
+    div
+  div
 
-  <script>
-    // NÚMERO DO WHATSAPP DA FERROS BARBEARIA
-    const BARBER_WHATSAPP = "5561994202952"; 
+  script
+     NÚMERO DO WHATSAPP DA FERROS BARBEARIA
+    const BARBER_WHATSAPP = 5561994202952; 
 
-    // APP STATE & DATA STORE
+     APP STATE & DATA STORE
     const defaultState = {
-      appointments: [],
-      queue: []
+      appointments [],
+      queue []
     };
 
-    let state = JSON.parse(localStorage.getItem('barberflow_db')) || defaultState;
+    let state = JSON.parse(localStorage.getItem('barberflow_db'))  defaultState;
     let selectedSlot = null;
 
     function saveState() {
@@ -348,54 +348,54 @@
       renderApp();
     }
 
-    // TAB NAVIGATION
+     TAB NAVIGATION
     function switchTab(tab) {
       document.getElementById('view-client').classList.add('hidden');
       document.getElementById('view-queue').classList.add('hidden');
       document.getElementById('view-admin').classList.add('hidden');
 
-      document.getElementById('tab-client').className = "px-3.5 py-1.5 rounded-lg font-medium text-gray-300 hover:text-white transition";
-      document.getElementById('tab-queue').className = "px-3.5 py-1.5 rounded-lg font-medium text-gray-300 hover:text-white transition";
-      document.getElementById('tab-admin').className = "px-3.5 py-1.5 rounded-lg font-medium text-gray-300 hover:text-white transition";
+      document.getElementById('tab-client').className = px-3.5 py-1.5 rounded-lg font-medium text-gray-300 hovertext-white transition;
+      document.getElementById('tab-queue').className = px-3.5 py-1.5 rounded-lg font-medium text-gray-300 hovertext-white transition;
+      document.getElementById('tab-admin').className = px-3.5 py-1.5 rounded-lg font-medium text-gray-300 hovertext-white transition;
 
       if(tab === 'client') {
         document.getElementById('view-client').classList.remove('hidden');
-        document.getElementById('tab-client').className = "px-3.5 py-1.5 rounded-lg font-medium text-black bg-brand-gold transition";
+        document.getElementById('tab-client').className = px-3.5 py-1.5 rounded-lg font-medium text-black bg-brand-gold transition;
       } else if(tab === 'queue') {
         document.getElementById('view-queue').classList.remove('hidden');
-        document.getElementById('tab-queue').className = "px-3.5 py-1.5 rounded-lg font-medium text-black bg-brand-gold transition";
+        document.getElementById('tab-queue').className = px-3.5 py-1.5 rounded-lg font-medium text-black bg-brand-gold transition;
       } else if(tab === 'admin') {
         document.getElementById('view-admin').classList.remove('hidden');
-        document.getElementById('tab-admin').className = "px-3.5 py-1.5 rounded-lg font-medium text-black bg-brand-gold transition";
+        document.getElementById('tab-admin').className = px-3.5 py-1.5 rounded-lg font-medium text-black bg-brand-gold transition;
       }
       renderApp();
     }
 
-    // INITIALIZE DATES & SLOTS
+     INITIALIZE DATES & SLOTS
     const todayStr = new Date().toISOString().split('T')[0];
     document.getElementById('booking-date').value = todayStr;
     document.getElementById('booking-date').min = todayStr;
 
     function updateSummary() {
-      const checkboxes = document.querySelectorAll('.service-checkbox:checked');
+      const checkboxes = document.querySelectorAll('.service-checkboxchecked');
       let services = [];
       let total = 0;
       let duration = 0;
 
-      checkboxes.forEach(cb => {
+      checkboxes.forEach(cb = {
         services.push(cb.value);
         total += parseInt(cb.dataset.price);
         duration += parseInt(cb.dataset.time);
       });
 
-      document.getElementById('summary-services').innerText = services.length ? services.join(', ') : 'Nenhum';
+      document.getElementById('summary-services').innerText = services.length  services.join(', ')  'Nenhum';
       document.getElementById('summary-total').innerText = `R$ ${total}`;
       document.getElementById('summary-duration').innerText = `${duration} min`;
 
       const dateVal = document.getElementById('booking-date').value;
       if(dateVal) {
         const [y, m, d] = dateVal.split('-');
-        document.getElementById('summary-date').innerText = `${d}/${m}/${y}`;
+        document.getElementById('summary-date').innerText = `${d}${m}${y}`;
       }
     }
 
@@ -407,33 +407,33 @@
       const dateVal = document.getElementById('booking-date').value;
       if(!dateVal) return;
 
-      // Horários de hora em hora (08:00 às 19:00)
+       Horários de hora em hora (0800 às 1900)
       const baseSlots = [
-        "08:00", "09:00", "10:00", "11:00", 
-        "12:00", "13:00", "14:00", "15:00", 
-        "16:00", "17:00", "18:00", "19:00"
+        0800, 0900, 1000, 1100, 
+        1200, 1300, 1400, 1500, 
+        1600, 1700, 1800, 1900
       ];
 
       const bookedForDate = state.appointments
-        .filter(a => a.date === dateVal && a.status !== 'cancelado')
-        .map(a => a.time);
+        .filter(a = a.date === dateVal && a.status !== 'cancelado')
+        .map(a = a.time);
 
-      baseSlots.forEach(time => {
+      baseSlots.forEach(time = {
         const isBooked = bookedForDate.includes(time);
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.disabled = isBooked;
 
         if(isBooked) {
-          btn.className = "bg-red-950/30 border border-red-900/40 text-red-500/50 line-through rounded-xl py-2 text-xs font-semibold cursor-not-allowed";
+          btn.className = bg-red-95030 border border-red-90040 text-red-50050 line-through rounded-xl py-2 text-xs font-semibold cursor-not-allowed;
           btn.innerText = `${time} (Ocupado)`;
         } else if(selectedSlot === time) {
-          btn.className = "bg-brand-gold text-black font-bold border border-brand-gold rounded-xl py-2 text-xs shadow-md";
+          btn.className = bg-brand-gold text-black font-bold border border-brand-gold rounded-xl py-2 text-xs shadow-md;
           btn.innerText = time;
         } else {
-          btn.className = "bg-black/50 border border-brand-border hover:border-brand-gold text-white rounded-xl py-2 text-xs font-medium transition";
+          btn.className = bg-black50 border border-brand-border hoverborder-brand-gold text-white rounded-xl py-2 text-xs font-medium transition;
           btn.innerText = time;
-          btn.onclick = () => {
+          btn.onclick = () = {
             selectedSlot = time;
             document.getElementById('summary-time').innerText = time;
             generateTimeSlots();
@@ -443,21 +443,21 @@
       });
     }
 
-    // CONFIRM BOOKING & WHATSAPP
+     CONFIRM BOOKING & WHATSAPP
     function confirmBooking() {
       const name = document.getElementById('client-name').value.trim();
       const phone = document.getElementById('client-phone').value.trim();
       const date = document.getElementById('booking-date').value;
 
-      const checkboxes = document.querySelectorAll('.service-checkbox:checked');
+      const checkboxes = document.querySelectorAll('.service-checkboxchecked');
       let services = [];
       let total = 0;
-      checkboxes.forEach(cb => {
+      checkboxes.forEach(cb = {
         services.push(cb.value);
         total += parseInt(cb.dataset.price);
       });
 
-      if(!name || !phone) {
+      if(!name  !phone) {
         alert('Por favor, preencha seu nome e telefone.');
         return;
       }
@@ -471,41 +471,41 @@
       }
 
       const newAppointment = {
-        id: Date.now(),
+        id Date.now(),
         name,
         phone,
-        services: services.join(', '),
+        services services.join(', '),
         date,
-        time: selectedSlot,
+        time selectedSlot,
         total,
-        status: 'confirmado'
+        status 'confirmado'
       };
 
       state.appointments.push(newAppointment);
       saveState();
 
-      // Format WhatsApp Message
+       Format WhatsApp Message
       const [y, m, d] = date.split('-');
-      const formattedDate = `${d}/${m}/${y}`;
-      const msg = encodeURIComponent(`Olá! Gostaria de confirmar meu agendamento na Ferros Barbearia:\n\n` +
-                  `👤 Cliente: ${name}\n` +
-                  `✂️ Serviços: ${services.join(', ')}\n` +
-                  `📅 Data: ${formattedDate}\n` +
-                  `⏰ Horário: ${selectedSlot}\n` +
-                  `💰 Valor Total: R$ ${total}\n\n` +
+      const formattedDate = `${d}${m}${y}`;
+      const msg = encodeURIComponent(`Olá! Gostaria de confirmar meu agendamento na Ferros Barbeariann` +
+                  `👤 Cliente ${name}n` +
+                  `✂️ Serviços ${services.join(', ')}n` +
+                  `📅 Data ${formattedDate}n` +
+                  `⏰ Horário ${selectedSlot}n` +
+                  `💰 Valor Total R$ ${total}nn` +
                   `Aguardo a confirmação!`);
 
       alert('Agendamento realizado na Ferros Barbearia! Redirecionando para o WhatsApp...');
-      window.open(`https://api.whatsapp.com/send?phone=${BARBER_WHATSAPP}&text=${msg}`, '_blank');
+      window.open(`httpsapi.whatsapp.comsendphone=${BARBER_WHATSAPP}&text=${msg}`, '_blank');
 
       document.getElementById('client-name').value = '';
       document.getElementById('client-phone').value = '';
       selectedSlot = null;
-      document.getElementById('summary-time').innerText = '--:--';
+      document.getElementById('summary-time').innerText = '----';
       generateTimeSlots();
     }
 
-    // QUEUE MODAL FUNCTIONS
+     QUEUE MODAL FUNCTIONS
     function openJoinQueueModal() { document.getElementById('modal-queue').classList.remove('hidden'); }
     function closeJoinQueueModal() { document.getElementById('modal-queue').classList.add('hidden'); }
 
@@ -519,11 +519,11 @@
       }
 
       state.queue.push({
-        id: Date.now(),
+        id Date.now(),
         name,
         service,
-        joinedAt: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
-        status: 'aguardando'
+        joinedAt new Date().toLocaleTimeString([], {hour '2-digit', minute'2-digit'}),
+        status 'aguardando'
       });
 
       saveState();
@@ -533,7 +533,7 @@
     }
 
     function updateQueueStatus(id, newStatus) {
-      const item = state.queue.find(q => q.id === id);
+      const item = state.queue.find(q = q.id === id);
       if(item) {
         item.status = newStatus;
         saveState();
@@ -541,103 +541,103 @@
     }
 
     function updateAppointmentStatus(id, newStatus) {
-      const item = state.appointments.find(a => a.id === id);
+      const item = state.appointments.find(a = a.id === id);
       if(item) {
         item.status = newStatus;
         saveState();
       }
     }
 
-    // RENDER APP STATE
+     RENDER APP STATE
     function renderApp() {
-      // 1. Render Public Queue View
+       1. Render Public Queue View
       const queueListContainer = document.getElementById('queue-list');
       queueListContainer.innerHTML = '';
 
-      const nowServing = state.queue.find(q => q.status === 'atendendo');
+      const nowServing = state.queue.find(q = q.status === 'atendendo');
 
       if(nowServing) {
         document.getElementById('now-serving-name').innerText = nowServing.name;
         document.getElementById('now-serving-service').innerText = `${nowServing.service} • Entrou às ${nowServing.joinedAt}`;
       } else {
-        document.getElementById('now-serving-name').innerText = "Nenhum cliente na cadeira";
-        document.getElementById('now-serving-service').innerText = "Aguardando próximo da fila";
+        document.getElementById('now-serving-name').innerText = Nenhum cliente na cadeira;
+        document.getElementById('now-serving-service').innerText = Aguardando próximo da fila;
       }
 
-      const waitingQueue = state.queue.filter(q => q.status === 'aguardando');
+      const waitingQueue = state.queue.filter(q = q.status === 'aguardando');
       if(waitingQueue.length === 0) {
-        queueListContainer.innerHTML = '<p class="text-xs text-gray-500 py-2">Nenhum cliente aguardando na fila presencial.</p>';
+        queueListContainer.innerHTML = 'p class=text-xs text-gray-500 py-2Nenhum cliente aguardando na fila presencial.p';
       } else {
-        waitingQueue.forEach((item, index) => {
+        waitingQueue.forEach((item, index) = {
           const div = document.createElement('div');
-          div.className = "bg-black/40 border border-brand-border p-3.5 rounded-xl flex items-center justify-between";
+          div.className = bg-black40 border border-brand-border p-3.5 rounded-xl flex items-center justify-between;
           div.innerHTML = `
-            <div class="flex items-center gap-3">
-              <span class="w-7 h-7 rounded-full bg-brand-gold/20 text-brand-gold text-xs font-bold flex items-center justify-center border border-brand-gold/30">#${index + 1}</span>
-              <div>
-                <p class="font-bold text-white text-sm">${item.name}</p>
-                <p class="text-xs text-gray-400">${item.service}</p>
-              </div>
-            </div>
-            <span class="text-xs text-gray-500"><i class="fa-regular fa-clock mr-1"></i>${item.joinedAt}</span>
+            div class=flex items-center gap-3
+              span class=w-7 h-7 rounded-full bg-brand-gold20 text-brand-gold text-xs font-bold flex items-center justify-center border border-brand-gold30#${index + 1}span
+              div
+                p class=font-bold text-white text-sm${item.name}p
+                p class=text-xs text-gray-400${item.service}p
+              div
+            div
+            span class=text-xs text-gray-500i class=fa-regular fa-clock mr-1i${item.joinedAt}span
           `;
           queueListContainer.appendChild(div);
         });
       }
 
-      // 2. Render Admin View
-      document.getElementById('admin-date-label').innerText = `Hoje (${todayStr.split('-').reverse().join('/')})`;
-      document.getElementById('admin-today-count').innerText = state.appointments.filter(a => a.date === todayStr).length + state.queue.length;
+       2. Render Admin View
+      document.getElementById('admin-date-label').innerText = `Hoje (${todayStr.split('-').reverse().join('')})`;
+      document.getElementById('admin-today-count').innerText = state.appointments.filter(a = a.date === todayStr).length + state.queue.length;
 
-      // Admin Appointments
+       Admin Appointments
       const adminAppList = document.getElementById('admin-appointments-list');
       adminAppList.innerHTML = '';
-      const todayAppointments = state.appointments.filter(a => a.date === todayStr);
+      const todayAppointments = state.appointments.filter(a = a.date === todayStr);
 
       if(todayAppointments.length === 0) {
-        adminAppList.innerHTML = '<p class="text-xs text-gray-500 py-3">Sem agendamentos para hoje.</p>';
+        adminAppList.innerHTML = 'p class=text-xs text-gray-500 py-3Sem agendamentos para hoje.p';
       } else {
-        todayAppointments.forEach(app => {
+        todayAppointments.forEach(app = {
           const div = document.createElement('div');
-          div.className = "bg-black/40 border border-brand-border p-3 rounded-xl space-y-2";
+          div.className = bg-black40 border border-brand-border p-3 rounded-xl space-y-2;
           div.innerHTML = `
-            <div class="flex justify-between items-start">
-              <div>
-                <span class="bg-brand-gold text-black text-[10px] font-bold px-2 py-0.5 rounded-md">${app.time}</span>
-                <h4 class="font-bold text-white text-sm mt-1">${app.name}</h4>
-                <p class="text-xs text-gray-400">${app.services} • R$ ${app.total}</p>
-              </div>
-              <span class="text-[10px] uppercase font-bold px-2 py-1 rounded-md ${app.status === 'concluido' ? 'bg-green-900/40 text-green-400 border border-green-800' : 'bg-yellow-900/40 text-yellow-400 border border-yellow-800'}">${app.status}</span>
-            </div>
-            <div class="flex gap-2 pt-1 border-t border-brand-border/50">
-              <button onclick="updateAppointmentStatus(${app.id}, 'concluido')" class="text-xs bg-green-600 hover:bg-green-500 text-white px-2.5 py-1 rounded-lg transition">Concluir</button>
-              <button onclick="updateAppointmentStatus(${app.id}, 'cancelado')" class="text-xs bg-red-900/40 hover:bg-red-800/60 text-red-300 px-2.5 py-1 rounded-lg transition">Cancelar</button>
-            </div>
+            div class=flex justify-between items-start
+              div
+                span class=bg-brand-gold text-black text-[10px] font-bold px-2 py-0.5 rounded-md${app.time}span
+                h4 class=font-bold text-white text-sm mt-1${app.name}h4
+                p class=text-xs text-gray-400${app.services} • R$ ${app.total}p
+              div
+              span class=text-[10px] uppercase font-bold px-2 py-1 rounded-md ${app.status === 'concluido'  'bg-green-90040 text-green-400 border border-green-800'  'bg-yellow-90040 text-yellow-400 border border-yellow-800'}${app.status}span
+            div
+            div class=flex gap-2 pt-1 border-t border-brand-border50
+              button onclick=updateAppointmentStatus(${app.id}, 'concluido') class=text-xs bg-green-600 hoverbg-green-500 text-white px-2.5 py-1 rounded-lg transitionConcluirbutton
+              button onclick=updateAppointmentStatus(${app.id}, 'cancelado') class=text-xs bg-red-90040 hoverbg-red-80060 text-red-300 px-2.5 py-1 rounded-lg transitionCancelarbutton
+            div
           `;
           adminAppList.appendChild(div);
         });
       }
 
-      // Admin Queue
+       Admin Queue
       const adminQueueList = document.getElementById('admin-queue-list');
       adminQueueList.innerHTML = '';
 
       if(state.queue.length === 0) {
-        adminQueueList.innerHTML = '<p class="text-xs text-gray-500 py-3">Fila presencial vazia.</p>';
+        adminQueueList.innerHTML = 'p class=text-xs text-gray-500 py-3Fila presencial vazia.p';
       } else {
-        state.queue.forEach(q => {
+        state.queue.forEach(q = {
           const div = document.createElement('div');
-          div.className = "bg-black/40 border border-brand-border p-3 rounded-xl flex items-center justify-between";
+          div.className = bg-black40 border border-brand-border p-3 rounded-xl flex items-center justify-between;
           div.innerHTML = `
-            <div>
-              <p class="font-bold text-white text-sm">${q.name}</p>
-              <p class="text-xs text-gray-400">${q.service} • ${q.joinedAt}</p>
-            </div>
-            <div class="flex gap-1.5">
-              ${q.status === 'aguardando' ? `<button onclick="updateQueueStatus(${q.id}, 'atendendo')" class="text-xs bg-brand-gold text-black font-bold px-2.5 py-1 rounded-lg">Chamar</button>` : ''}
-              ${q.status === 'atendendo' ? `<button onclick="updateQueueStatus(${q.id}, 'finalizado')" class="text-xs bg-green-600 text-white font-bold px-2.5 py-1 rounded-lg">Finalizar</button>` : ''}
-              <button onclick="updateQueueStatus(${q.id}, 'removido')" class="text-xs text-gray-400 hover:text-red-400 p-1"><i class="fa-solid fa-trash"></i></button>
-            </div>
+            div
+              p class=font-bold text-white text-sm${q.name}p
+              p class=text-xs text-gray-400${q.service} • ${q.joinedAt}p
+            div
+            div class=flex gap-1.5
+              ${q.status === 'aguardando'  `button onclick=updateQueueStatus(${q.id}, 'atendendo') class=text-xs bg-brand-gold text-black font-bold px-2.5 py-1 rounded-lgChamarbutton`  ''}
+              ${q.status === 'atendendo'  `button onclick=updateQueueStatus(${q.id}, 'finalizado') class=text-xs bg-green-600 text-white font-bold px-2.5 py-1 rounded-lgFinalizarbutton`  ''}
+              button onclick=updateQueueStatus(${q.id}, 'removido') class=text-xs text-gray-400 hovertext-red-400 p-1i class=fa-solid fa-trashibutton
+            div
           `;
           adminQueueList.appendChild(div);
         });
@@ -646,6 +646,6 @@
 
     generateTimeSlots();
     renderApp();
-  </script>
-</body>
-</html>
+  script
+body
+html
